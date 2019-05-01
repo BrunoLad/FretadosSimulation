@@ -3,11 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
-public class PauseManager : MonoBehaviour
+public class PauseManager : UIManager
 {
 
     public AudioMixerSnapshot paused;               // snapshot para áudio enquanto o jogo estiver pausado
@@ -84,21 +81,5 @@ public class PauseManager : MonoBehaviour
         Pause();
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
-    }
-
-    //Carrega a cena escolhida
-    public void LoadLevel(string level)
-    {
-        SceneManager.LoadScene(level);
-    }
-
-    //Encerra o jogo
-    public void Quit()
-    {
-        #if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
-        #else
-		Application.Quit();
-        #endif
     }
 }
