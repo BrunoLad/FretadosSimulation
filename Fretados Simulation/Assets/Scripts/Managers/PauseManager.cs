@@ -82,4 +82,11 @@ public class PauseManager : UIManager
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
+
+    //Carrega a cena escolhida
+    public new void LoadLevel(string level)
+    {
+        Pause();
+        base.LoadLevel(level);
+    }
 }
