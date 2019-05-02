@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
         
     }
 
-    //Carrega a cena escolhida
+    // Carrega a cena escolhida
     public void LoadLevel(string level)
     {
         SceneManager.LoadScene(level);
