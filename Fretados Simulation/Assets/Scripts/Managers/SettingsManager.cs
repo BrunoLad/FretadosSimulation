@@ -16,6 +16,11 @@ public class SettingsManager : UIManager
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize music and sound as on by default
+        PlayerPrefs.SetInt("Music", 1); 
+        PlayerPrefs.SetInt("Sound", 1);
+
+        // Hide the settings menu
         settingsObjects = GameObject.FindGameObjectsWithTag("SettingsMenu");
         HideSettings();
     }
@@ -47,7 +52,7 @@ public class SettingsManager : UIManager
     {
         Image musicImg = GameObject.Find("MusicButton").GetComponent<Image>();
 
-        if (music.isPlaying)
+        if (PlayerPrefs.GetInt("Music") == 1)
         {
             music.Stop();
             musicImg.sprite = musicOffSprite;
@@ -66,7 +71,7 @@ public class SettingsManager : UIManager
         Image soundImg = GameObject.Find("SoundButton").GetComponent<Image>();
 
         // Just putting this as is as a test
-        if (true)
+        if (PlayerPrefs.GetInt("Sound") == 1)
         {
             soundImg.sprite = soundOffSprite;
             PlayerPrefs.SetInt("Sound", 0);
