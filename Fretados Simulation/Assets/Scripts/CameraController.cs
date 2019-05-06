@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public float perspectiveZoomSpeed = 0.5f;        // The rate of change of the field of view in perspective mode.
+    public float perspectiveZoomSpeed = 0.3f;        // The rate of change of the field of view in perspective mode.
     public float orthoZoomSpeed = 0.5f;        // The rate of change of the orthographic size in orthographic mode.
+    public float speed = 0.1f;
+
+    private Vector3 dragOrigin;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +23,7 @@ public class CameraController : MonoBehaviour
         if (Input.touchCount == 2)
         {
             // Store both touches.
+            //Touch touchZero = Input.GetTouch(0);
             Touch touchZero = Input.GetTouch(0);
             Touch touchOne = Input.GetTouch(1);
 
@@ -39,11 +43,12 @@ public class CameraController : MonoBehaviour
             // If the camera is orthographic...
             if (camera.orthographic)
             {
+
                 // ... change the orthographic size based on the change in distance between the touches.
                 camera.orthographicSize += deltaMagnitudeDiff * orthoZoomSpeed;
 
                 // Make sure the orthographic size never drops below zero.
-                camera.orthographicSize = Mathf.Max(camera.orthographicSize, 0.1f);
+                camera.orthographicSize = Mathf.Clamp(camera.orthographicSize, 10f, 179.9f);
             }
             else
             {
@@ -53,6 +58,11 @@ public class CameraController : MonoBehaviour
                 // Clamp the field of view to make sure it's between 0 and 180.
                 camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, 0.1f, 179.9f);
             }
+        }
+        else if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
+            Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
+            transform.Translate(-touchDeltaPosition.x * speed, -touchDeltaPosition.y * speed, 0);
         }
     }
 }

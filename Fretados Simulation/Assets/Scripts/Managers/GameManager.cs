@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public AudioSource mainMusic;
+    public AudioSource mainMusic;               // Referência a música padrão do jogo que está sendo reproduzida
+    public List<AudioSource> audioSources;      // Will consider to make this public or to get either by layer or mask
 
     // Start is called before the first frame update
     void Start()
@@ -14,6 +15,11 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.GetInt("Music") == 0)
         {
             mainMusic.Stop();
+        }
+
+        if (PlayerPrefs.GetInt("Sound") == 0)
+        {
+            
         }
     }
 

@@ -41,7 +41,6 @@ public class SettingsManager : UIManager
 
     public void ShowSettings()
     {
-        Debug.Log("teste");
         foreach (GameObject g in settingsObjects)
         {
             g.SetActive(true);
